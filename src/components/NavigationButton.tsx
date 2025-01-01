@@ -1,16 +1,19 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
+import { useRouting } from '../hooks/useRouting';
 
 interface NavigationButtonProps {
   to: string;
-  icon: ReactNode;
+  icon: React.ReactNode;
   title: string;
   description: string;
 }
 
 export function NavigationButton({ to, icon, title, description }: NavigationButtonProps) {
+  const { createPath } = useRouting();
+  
   return (
     <a
-      href={to}
+      href={createPath(to)}
       className="block w-full p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 group"
     >
       <div className="flex items-center">

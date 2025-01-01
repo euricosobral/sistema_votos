@@ -4,17 +4,18 @@ import { VotingPage } from './pages/VotingPage';
 import { SettingsPage } from './pages/SettingsPage';
 import { ResultsPage } from './pages/ResultsPage';
 import { Navigation } from './components/Navigation';
+import { useRouting } from './hooks/useRouting';
 
 function App() {
-  const path = window.location.pathname;
+  const { currentPath } = useRouting();
 
   return (
     <>
       <div className="pb-16">
-        {path === '/' && <Home />}
-        {path === '/votar' && <VotingPage />}
-        {path === '/configuracoes' && <SettingsPage />}
-        {path === '/resultados' && <ResultsPage />}
+        {currentPath === '/' && <Home />}
+        {currentPath === '/votar' && <VotingPage />}
+        {currentPath === '/configuracoes' && <SettingsPage />}
+        {currentPath === '/resultados' && <ResultsPage />}
       </div>
       <Navigation />
     </>

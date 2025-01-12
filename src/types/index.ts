@@ -9,4 +9,5 @@ export interface Candidate {
 export interface VotingSettings {
   maxVotesPerUser: 1 | 2 | 3;
   electionName: string;
+  adminPassword: string;
 }

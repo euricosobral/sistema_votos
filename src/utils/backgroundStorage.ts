@@ -16,3 +16,11 @@ export function getBackgroundFromStorage(): string | null {
     return null;
   }
 }
+
+export function removeBackgroundFromStorage(): void {
+  try {
+    localStorage.removeItem(BACKGROUND_KEY);
+  } catch (error) {
+    console.error('Erro ao remover plano de fundo:', error);
+  }
+}

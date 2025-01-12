@@ -43,6 +43,25 @@ export function VotingSettings({ settings, onUpdateSettings }: VotingSettingsCom
             <option value={3}>3 votos</option>
           </select>
         </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Senha de Administrador
+          </label>
+          <input
+            type="password"
+            value={settings.adminPassword}
+            onChange={(e) => onUpdateSettings({
+              ...settings,
+              adminPassword: e.target.value
+            })}
+            placeholder="Digite a nova senha"
+            className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3"
+          />
+          <p className="mt-1 text-sm text-gray-500">
+            Deixe em branco para manter a senha atual
+          </p>
+        </div>
       </div>
     </div>
   );

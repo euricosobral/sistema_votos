@@ -14,10 +14,11 @@ export function VotingPage() {
     settings,
     handleToggleVote,
     handleSubmitVote,
+    handleResetVotes,
   } = useVoting();
 
   const handleNewVote = () => {
-    window.location.reload();
+    handleResetVotes();
   };
 
   return (

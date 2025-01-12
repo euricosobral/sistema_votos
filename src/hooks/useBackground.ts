@@ -1,47 +1,32 @@
 import { useCallback } from 'react';
-import { saveBackgroundToStorage, getBackgroundFromStorage } from '../utils/backgroundStorage';
+import { BackgroundService } from '../services/backgroundService';
 
 export function useBackground() {
   const handleBackgroundChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
-    // Validação de segurança
-    if (!file.type.startsWith('image/')) {
-      alert('Por favor, selecione apenas arquivos de imagem.');
+    if (!BackgroundService.validateImage(file)) {
       return;
     }
 
-    // Limite de tamanho (5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      alert('A imagem deve ter no máximo 5MB.');
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const background = e.target?.result as string;
-      saveBackgroundToStorage(background);
-      document.body.style.backgroundImage = `url(${background})`;
-      document.body.style.backgroundSize = 'cover';
-      document.body.style.backgroundPosition = 'center';
-      document.body.style.backgroundAttachment = 'fixed';
-    };
-    reader.readAsDataURL(file);
+    BackgroundService.processAndSaveImage(file);
   }, []);
 
   const initBackground = useCallback(() => {
-    const savedBackground = getBackgroundFromStorage();
+    const savedBackground = BackgroundService.getBackground();
     if (savedBackground) {
-      document.body.style.backgroundImage = `url(${savedBackground})`;
-      document.body.style.backgroundSize = 'cover';
-      document.body.style.backgroundPosition = 'center';
-      document.body.style.backgroundAttachment = 'fixed';
+      BackgroundService.applyBackground(savedBackground);
     }
+  }, []);
+
+  const resetBackground = useCallback(() => {
+    BackgroundService.removeBackground();
   }, []);
 
   return {
     handleBackgroundChange,
-    initBackground
+    initBackground,
+    resetBackground
   };
 }

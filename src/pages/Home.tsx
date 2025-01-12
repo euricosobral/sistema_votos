@@ -3,6 +3,7 @@ import { Settings, Vote, PieChart } from 'lucide-react';
 import { NavigationButton } from '../components/NavigationButton';
 import { BackgroundManager } from '../components/BackgroundManager';
 import { useBackground } from '../hooks/useBackground';
+import { ROUTES } from '../utils/routes';
 
 export function Home() {
   const { initBackground } = useBackground();
@@ -22,21 +23,21 @@ export function Home() {
         
         <div className="space-y-4">
           <NavigationButton
-            to="/votar"
+            to={ROUTES.VOTING}
             icon={<Vote className="w-6 h-6" />}
             title="Votar"
             description="Acesse o sistema de votação"
           />
           
           <NavigationButton
-            to="/resultados"
+            to={ROUTES.RESULTS}
             icon={<PieChart className="w-6 h-6" />}
             title="Resultados"
             description="Visualize os resultados da votação"
           />
           
           <NavigationButton
-            to="/configuracoes"
+            to={ROUTES.SETTINGS}
             icon={<Settings className="w-6 h-6" />}
             title="Configurações"
             description="Gerencie candidatos e configurações"

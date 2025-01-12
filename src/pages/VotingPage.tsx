@@ -4,6 +4,7 @@ import { BackButton } from '../components/BackButton';
 import { StatusMessage } from '../components/StatusMessage';
 import { ConfirmVoteButton } from '../components/ConfirmVoteButton';
 import CandidateCard from '../components/CandidateCard';
+import { Vote } from 'lucide-react';
 
 export function VotingPage() {
   const {
@@ -14,6 +15,10 @@ export function VotingPage() {
     handleToggleVote,
     handleSubmitVote,
   } = useVoting();
+
+  const handleNewVote = () => {
+    window.location.reload();
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 py-8 px-4">
@@ -26,7 +31,18 @@ export function VotingPage() {
         </div>
 
         {selectedCandidate && <StatusMessage type="selected" />}
-        {votedCandidates.length > 0 && !selectedCandidate && <StatusMessage type="voted" />}
+        {votedCandidates.length > 0 && !selectedCandidate && (
+          <div className="flex flex-col items-center gap-4 mb-8">
+            <StatusMessage type="voted" />
+            <button
+              onClick={handleNewVote}
+              className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+            >
+              <Vote className="w-5 h-5" />
+              Novo Voto
+            </button>
+          </div>
+        )}
 
         {candidates.length > 0 ? (
           <>

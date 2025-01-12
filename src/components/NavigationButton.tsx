@@ -9,12 +9,16 @@ interface NavigationButtonProps {
 }
 
 export function NavigationButton({ to, icon, title, description }: NavigationButtonProps) {
-  const { createPath } = useRouting();
+  const { navigate } = useRouting();
   
+  const handleClick = () => {
+    navigate(to);
+  };
+
   return (
-    <a
-      href={createPath(to)}
-      className="block w-full p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 group"
+    <button
+      onClick={handleClick}
+      className="block w-full p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 group text-left"
     >
       <div className="flex items-center">
         <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-200 transition-colors duration-200">
@@ -25,6 +29,6 @@ export function NavigationButton({ to, icon, title, description }: NavigationBut
           <p className="text-gray-600">{description}</p>
         </div>
       </div>
-    </a>
+    </button>
   );
 }

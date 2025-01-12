@@ -9,13 +9,26 @@ import { useRouting } from './hooks/useRouting';
 function App() {
   const { currentPath } = useRouting();
 
+  // Função para determinar qual componente renderizar
+  const renderPage = () => {
+    switch (currentPath) {
+      case '/':
+        return <Home />;
+      case '/votar':
+        return <VotingPage />;
+      case '/configuracoes':
+        return <SettingsPage />;
+      case '/resultados':
+        return <ResultsPage />;
+      default:
+        return <Home />; // Fallback para a página inicial
+    }
+  };
+
   return (
     <>
       <div className="pb-16">
-        {currentPath === '/' && <Home />}
-        {currentPath === '/votar' && <VotingPage />}
-        {currentPath === '/configuracoes' && <SettingsPage />}
-        {currentPath === '/resultados' && <ResultsPage />}
+        {renderPage()}
       </div>
       <Navigation />
     </>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Sistema de Votação - Eleições</title>
+    <script type="text/javascript">
+      // Redireciona todas as requisições para o index.html com o path na query string
+      var l = window.location;
+      var path = l.pathname.slice(1);
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        '/sistema_votos/?/' + path +
+        (l.search ? '&' + l.search.slice(1) : '') +
+        l.hash
+      );
+    </script>
+  </head>
+  <body></body>
+</html>
